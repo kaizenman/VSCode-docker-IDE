@@ -1,0 +1,112 @@
+{
+    "version": "2.0.0",
+    
+    "windows": {
+        "options": {
+            "shell": {
+                "executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "args": [
+                    "-NoProfile",
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-Command"
+                ]
+            }
+        }
+    },
+    "linux": {
+        "options": {
+            "shell": {
+                "executable": "/usr/bin/pwsh",
+                "args": [
+                    "-NoProfile",
+                    "-Command"
+                ]
+            }
+        }
+    },
+    "osx": {
+        "options": {
+            "shell": {
+                "executable": "/usr/local/bin/pwsh",
+                "args": [
+                    "-NoProfile",
+                    "-Command"
+                ]
+            }
+        }
+    },
+    "tasks" : [
+        {
+
+            "label": "Get Linux IntelliSense",
+            "command" : "docker run --rm -it -v ${PWD}:/Projects -v C:\\include\\linux:/include --name debian_cpp debian_cpp_image /bin/bash -c 'Projects/docker/intellisense.sh'",
+            "type" : "shell"
+        },
+        {
+            "label": "Get glfw Linux intellisense",
+            "command" : "docker run --rm -it -v ${PWD}:/Projects -v C:\\include\\linux:/include --name debian_cpp debian_cpp_image /bin/bash -c 'Projects/docker/glfw_intellisense.sh'",
+            "type" : "shell"
+        },
+        {
+            "label": "Get Windows IntelliSense",
+            "command" : "docker run -it -v C:\\Users\\Administrator\\Projects:c:\\projects -v C:\\include\\windows:C:\\include windows_cpp powershell.exe -File C:\\projects\\docker\\intellisense.ps1",
+            "type" : "shell"
+        },
+        {
+            "label": "Get Windows OpenGL IntelliSense",
+            "command" : "docker run -it -v C:\\Users\\Administrator\\Projects:c:\\projects -v C:\\include\\windows:C\\include windows_cpp powershell.exe -File C:\\projects\\docker\\opengl_intellisense_windows.ps1"
+        },
+        {
+            "label": "Run_debian_cpp",
+            "command" : "docker run --rm -it -v ${PWD}:/Projects --name debian_cpp debian_cpp_image /bin/bash",
+            "type" : "shell"
+        },
+        {
+            "label": "Run_windows_cpp",
+            "command" : "docker run -it --volume C:\\Users\\Administrator\\Projects:c:\\projects -v C:\\include\\windows:C:\\include windows_cpp",
+            "type" : "shell"
+        },
+        {
+            "label": "Compile: CLang++6.0",
+            "command" : "docker exec -u root -it debian_cpp /bin/bash -c '/Projects/docker/clang++6.0.sh ${relativeFile}'",
+            "type" : "shell"
+        },
+        {
+            "label": "Compile: g++8",
+            "command" : "docker exec -u root -it debian_cpp /bin/bash -c '/Projects/docker/g++8.sh ${relativeFile}'",
+            "type" : "shell"
+        },
+        {
+            "label": "CMake-clang-libstdcxx-BUILD-RUN",
+            "command" : "docker exec -u root -it debian_cpp /bin/bash -c '/Projects/docker/cmake-clang-libstdcxx.sh'",
+            "type" : "shell"
+        },
+        {
+            "label": "Compile: Linux CMake-OpenGL",
+            "command" : "docker exec -u root -it debian_cpp /bin/bash -c '/Projects/docker/cmake_build_Opengl.sh'",
+            "type" : "shell"
+        },
+        {
+            // Don't forget to switch to Windows containers
+            "label": "Compile: Visual C++ (MSVC)",
+            "command" : "docker run -it --volume C:\\Users\\Administrator\\Projects:c:\\projects windows_cpp powershell.exe -File C:\\projects\\docker\\msBuild.ps1",
+            "type" : "shell"
+        },
+        {
+            "label": "Compile: OpenGL + Visual C++",
+            "command" : "docker run -it --volume C:\\Users\\Administrator\\Projects:c:\\projects windows_cpp powershell.exe -File C:\\projects\\docker\\msBuildOpenGL.ps1",
+            "type" : "shell"
+        },
+        {
+            "label": "Run: Visual C++ app",
+            "command": "Start-Process -FilePath 'C:\\Users\\Administrator\\Projects\\bin\\run_Windows.exe'",
+            "type" : "shell"
+        },
+        {
+            "label": "Run: Linux OpenGL app",
+            "command": "docker run -ti --rm -e DISPLAY=192.168.0.102:0.0 -v C:\\Users\\Administrator\\Projects:/Projects --name debian_cpp debian_cpp_image /bin/bash -c '/Projects/bin/run_linux'",
+            "type" : "shell"
+        }
+    ]
+}

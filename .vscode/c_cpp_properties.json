@@ -1,0 +1,47 @@
+{
+    "configurations": [
+        {
+            "name": "Linux-clang-x64",
+            "intelliSenseMode": "clang-x64",
+            "includePath": [
+                "C:/include/linux/include/c++/8",
+                "C:/include/linux/include/x86_64-linux-gnu/c++/8",
+                "C:/include/linux/include/c++/8/parallel",
+                "C:/include/linux/include/c++/8/tr1",
+                "C:/include/linux/include/linux",
+                "C:/include/linux/include/llvm-6.0/llvm/Support",
+                "C:/include/linux/include",
+                "C:/include/linux/include/llvm-6.0",
+                "C:/include/linux/include/x86_64-linux-gnu",
+                "C:/include/linux"
+            ],
+            "defines": [
+                "__linux__"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        },
+        {
+            "name": "Windows-MSVC",
+            "intelliSenseMode": "clang-x64",
+            "includePath": [
+                "C:/include/windows/MSVC",
+                "C:/include/windows/WindowsKits/um",
+                "C:/include/windows/WindowsKits/shared",
+                "C:/include/windows/WindowsKits/ucrt",
+                "C:/include/windows/WindowsKits/cppwinrt",
+                "C:/include/windows/WindowsKits/winrt",
+                "C:/include/windows/.include",
+                "C:/include/windows/.include/GL",
+                "C:/include/windows/.include/GLFW"
+            ],
+            "defines": [
+                "_WIN32"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "files.defaultLanguage": "c++",
+    "version": 4
+}
