@@ -10,10 +10,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(SOURCE_FILES main.cpp)
 
 if(WIN32)
-  set(DYNAMIC_LIBRARY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../bin")
-  set(STATIC_LIBRARY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../.lib")
+  set(DYNAMIC_LIBRARY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/bin")
+  set(STATIC_LIBRARY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/.lib")
 
-  set(INCLUDE_DIR "{CMAKE_CURRENT_SOURCE_DIR}/../../.include")
+  set(INCLUDE_DIR "{CMAKE_CURRENT_SOURCE_DIR}/../.include")
   include_directories(${INCLUDE_DIR})
   set(ALL_LIBS
      freeglut
@@ -27,8 +27,6 @@ if(WIN32)
   # OPENGL
   add_executable(run_windows ${SOURCE_FILES})
   TARGET_LINK_LIBRARIES(run_windows ${ALL_LIBS})
-
-
 endif()
 
 if(APPLE)
@@ -39,7 +37,13 @@ if(APPLE)
   target_link_libraries(run_darwin glfw ${OPENGL_LIBRARIES})
 endif()
 
-if(UNIX AND NOT APPLE)
+if(ANDROID)
+	add_library(gl2jni SHARED main.cpp)
+	# add lib dependencies
+	target_link_libraries(gl2jni android log EGL GLESv2)
+endif()
+
+if(UNIX AND NOT APPLE AND NOT ANDROID)
     set(LINUX TRUE)
 endif()
 if(LINUX)
@@ -48,10 +52,6 @@ if(LINUX)
   find_package(OpenGL REQUIRED)
   add_definitions(${OPENGL_DEFINITIONS})
   find_package(X11 REQUIRED)
-
-
-
-
   # =============SOME WEIRED SHIT HAPPENS SO WE NEED TO FIND RANDR 
     set(XRANDR_ROOT_DIR
       "${XRANDR_ROOT_DIR}"
@@ -119,4 +119,5 @@ if(LINUX)
   include_directories(${OPENGL_INCLUDE_DIRS} ${INCLUDE_DIR} "/usr/include")
   target_link_libraries(run_linux ${LIBS} ${OPENGL_LIBRARIES})
 endif()
+
 

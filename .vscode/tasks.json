@@ -37,6 +37,7 @@
         }
     },
     "tasks" : [
+        // Update intellisense (do only once)
         {
 
             "label": "Get Linux IntelliSense",
@@ -58,6 +59,12 @@
             "command" : "docker run -it -v C:\\Users\\Administrator\\Projects:c:\\projects -v C:\\include\\windows:C\\include windows_cpp powershell.exe -File C:\\projects\\docker\\opengl_intellisense_windows.ps1"
         },
         {
+            "label": "Get Android Intellisense",
+            "command" : "docker run --rm -it -v ${PWD}:/Projects -v C:\\include\\android:/include android-sdk /bin/bash -c 'Projects/docker/android_intellisense.sh'",
+            "type" : "shell"
+        },
+        // Run containers with command prompt
+        {
             "label": "Run_debian_cpp",
             "command" : "docker run --rm -it -v ${PWD}:/Projects --name debian_cpp debian_cpp_image /bin/bash",
             "type" : "shell"
@@ -68,6 +75,12 @@
             "type" : "shell"
         },
         {
+            "label": "Run_android_cpp",
+            "command": "docker run -it -v C:\\Users\\Administrator\\Projects:/Projects android-sdk /bin/bash",
+            "type" : "shell"
+        },
+        // Compile single file
+        {
             "label": "Compile: CLang++6.0",
             "command" : "docker exec -u root -it debian_cpp /bin/bash -c '/Projects/docker/clang++6.0.sh ${relativeFile}'",
             "type" : "shell"
@@ -77,6 +90,7 @@
             "command" : "docker exec -u root -it debian_cpp /bin/bash -c '/Projects/docker/g++8.sh ${relativeFile}'",
             "type" : "shell"
         },
+        // CMake
         {
             "label": "CMake-clang-libstdcxx-BUILD-RUN",
             "command" : "docker exec -u root -it debian_cpp /bin/bash -c '/Projects/docker/cmake-clang-libstdcxx.sh'",
@@ -87,26 +101,39 @@
             "command" : "docker exec -u root -it debian_cpp /bin/bash -c '/Projects/docker/cmake_build_Opengl.sh'",
             "type" : "shell"
         },
+        // Microsoft Visual C++ with Windows SDK
         {
             // Don't forget to switch to Windows containers
             "label": "Compile: Visual C++ (MSVC)",
             "command" : "docker run -it --volume C:\\Users\\Administrator\\Projects:c:\\projects windows_cpp powershell.exe -File C:\\projects\\docker\\msBuild.ps1",
             "type" : "shell"
         },
+        // Microsoft Visual C++ with OpenGL and Windows SDK
         {
             "label": "Compile: OpenGL + Visual C++",
             "command" : "docker run -it --volume C:\\Users\\Administrator\\Projects:c:\\projects windows_cpp powershell.exe -File C:\\projects\\docker\\msBuildOpenGL.ps1",
             "type" : "shell"
         },
+        // CMake with Android SDK
+        {
+            "label": "Compile: Android CMake",
+            "command" : "docker run -it -v ${PWD}:/Projects android-sdk /bin/bash -c 'Projects/docker/cmake_android.sh'",
+            "type" : "shell"
+        },
+        // Run windows binary on host system
         {
             "label": "Run: Visual C++ app",
             "command": "Start-Process -FilePath 'C:\\Users\\Administrator\\Projects\\bin\\run_Windows.exe'",
             "type" : "shell"
         },
+        // Run linux X11 opengl binary from linux container with GUI
         {
             "label": "Run: Linux OpenGL app",
             "command": "docker run -ti --rm -e DISPLAY=192.168.0.102:0.0 -v C:\\Users\\Administrator\\Projects:/Projects --name debian_cpp debian_cpp_image /bin/bash -c '/Projects/bin/run_linux'",
             "type" : "shell"
         }
+        // To run android simulator from docker container
+        // use linux host system
+        // Currently I use real android phone
     ]
 }

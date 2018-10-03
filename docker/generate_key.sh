@@ -1,0 +1,1 @@
+keytool -genkey -v -keystore pleasework.keystore -alias pleasework -keyalg RSA -keysize 2048 -validity 10000

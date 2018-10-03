@@ -13,7 +13,8 @@
                 "C:/include/linux/include",
                 "C:/include/linux/include/llvm-6.0",
                 "C:/include/linux/include/x86_64-linux-gnu",
-                "C:/include/linux"
+                "C:/include/linux",
+                "C:/Users/Administrator/Projects/tlpi-book/lib"
             ],
             "defines": [
                 "__linux__"
@@ -40,8 +41,32 @@
             ],
             "cStandard": "c11",
             "cppStandard": "c++17"
+        },
+        {
+            "name": "Android-clang-x64",
+            "intelliSenseMode": "clang-x64",
+            "includePath": [
+                "C:/include/android/include",
+                "C:/include/android/",
+                "C:/include/android/android-sdk",
+                "C:/include/android/include/x86_64-linux-gnu",
+                "C:/include/android/android-sdk/opt/android-sdk/ndk-bundle/sysroot/usr/include/android",
+                "C:/include/android/android-sdk/opt/android-sdk/ndk-bundle/sysroot/usr/include",
+                "C:/include/android/android-sdk/opt/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/7.0.2/include",
+                "C:/include/android/android-sdk/llvm-libc++/include"
+            ],
+            "defines": [
+                "__ANDROID__"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17"
         }
     ],
     "files.defaultLanguage": "c++",
     "version": 4
 }
+
+
+
+
+

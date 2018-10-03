@@ -1,0 +1,39 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    defaultConfig {
+        applicationId 'com.android.gl2jni'
+        minSdkVersion 14
+        targetSdkVersion 25
+        externalNativeBuild {
+            cmake {
+                // Available argumetns are inside ${SDK}/cmake/.../android.toolchain.cmake file
+                arguments '-DANDROID_STL=c++_static'
+            }
+        }
+    }
+    signingConfigs {
+        release {
+           // if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file("/Projects/pleasework.keystore")
+                keyAlias 'pleasework'
+                storePassword 'pleasework'
+                keyPassword 'pleasework'
+           // }
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled = false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                          'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path '../CMakeLists.txt'
+        }
+    }
+}
