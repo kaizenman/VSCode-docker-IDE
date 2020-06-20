@@ -5,9 +5,9 @@ echo ----------------------------------
 echo Building source code
 echo ... Going to Project folder
 
-echo ... Adding /usr/bin/clang++-6.0/bin to PATH variable && 
-export PATH=/usr/bin/clang++-6.0/bin:$PATH 
-echo ... Adding /usr/lib/clang/6.0/lib to LD_LIBRARY_PATH variable && 
+echo ... Adding /usr/bin/clang++-10.0/bin to PATH variable && 
+export PATH=/usr/bin/clang++-10.0/bin:$PATH 
+echo ... Adding /usr/lib/clang/10.0/lib to LD_LIBRARY_PATH variable && 
 export LD_LIBRARY_PATH=/usr/lib/clang/6.0/lib:$LD_LIBRARY_PATH
 export POLLY_ROOT=/polly-0.10.3
 

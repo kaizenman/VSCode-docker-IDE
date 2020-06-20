@@ -7,6 +7,9 @@
 #   include <GL/glew.h>
 #   include <gl/glu.h>
 #   include <GLFW/glfw3.h>
+#define FREEGLUT_STATIC
+#define _LIB
+#define FREEGLUT_LIB_PRAGMAS 0
 #   include <GL/freeglut.h>
 #elif __ANDROID__
 #   include <jni.h>
@@ -279,6 +282,7 @@ void CrossPlatformHelloFunc()
     else {
       printf("\n\tvisual %p selected\n", (void *)vi->visualid); /* %p creates hexadecimal output like in glxinfo */
     }
+
 
 
     cmap = XCreateColormap(dpy, root, vi->visual, AllocNone);

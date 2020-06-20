@@ -1,6 +1,6 @@
-$WindowsKitsSourcePath = "C:\Program Files (x86)\Windows Kits\10\Include\10.0.17134.0\"
-$MSVCIncludeSourcePath = "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.15.26726\include\"
-$MSVCBuildToolsSourcePath = "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.15.26726\include\"
+$WindowsKitsSourcePath = "C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\"
+$MSVCIncludeSourcePath = "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\include\"
+$MSVCBuildToolsSourcePath = "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\include\"
 
 $WindowsKitsDestPath = "C:\include\WindowsKits\"
 $MSVCIncludeDestPath = "C:\include\MSVC\"

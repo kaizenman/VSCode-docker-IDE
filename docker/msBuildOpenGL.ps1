@@ -1,4 +1,11 @@
 #get current location
+
+Copy-Item 'C:\projects\VSCode-docker-IDE' 'C:\helloDockerForWindowsBug' -Recurse
+Copy-Item 'C:\.include' 'C:\helloDockerForWindowsBug\.include' -Recurse
+Copy-Item 'C:\.lib' 'C:\helloDockerForWindowsBug\.lib' -Recurse
+cd 'C:\helloDockerForWindowsBug'
+
+
 $DOCDIR = (Resolve-Path .\).Path
 
 function Resolve-MsBuild {
@@ -41,7 +48,7 @@ if(!(Test-Path -Path $DOCDIR"/bin")){
 }
 
 #copy binary
-Copy-Item -Path $DOCDIR"\Build\bin\Release\run_windows.exe" -Destination $DOCDIR"\bin\run_windows.exe"
+Copy-Item -Path "C:\helloDockerForWindowsBug\Build\bin\Release\run_windows.exe" -Destination "C:\projects\VSCode-docker-IDE\bin\run_windows.exe"
 
 cd $DOCDIR
 #delete Buld directory

@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cd Projects
+export ANDROID_HOME=/opt/android-sdk
+sdkmanager --licenses
+cd /Projects
 ./gradlew assembleRelease
 cp -vf /Projects/app/build/outputs/apk/release/app-release.apk /Projects/bin
 

@@ -1,0 +1,1 @@
+$DISPLAY = bash linux_x11_run.sh

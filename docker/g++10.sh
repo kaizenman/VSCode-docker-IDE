@@ -9,7 +9,7 @@ echo ...Removing existing executable file $1.out &&
 echo rm /Projects/$1.out && 
 rm /Projects/$1.out
 
-g++ /Projects/$1 -o /Projects/$1.out -lstdc++fs -lc++experimental
+g++ /Projects/$1 -o /Projects/$1.out -lstdc++fs
 
 echo Output: && 
 ./Projects/$1.out 

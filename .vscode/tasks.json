@@ -45,49 +45,60 @@
             "type" : "shell"
         },
         {
-            "label": "Get glfw Linux intellisense",
+            "label": "Get Linux Boost IntelliSense",
+            "command" : "docker run --rm -it -v ${PWD}:/Projects -v C:\\include\\linux:/include --name debian_cpp debian_cpp_image /bin/bash -c 'Projects/docker/boost_intellisense.sh'",
+            "type" : "shell"
+        },
+        {
+            "label": "Get Linux GLFW intellisense",
             "command" : "docker run --rm -it -v ${PWD}:/Projects -v C:\\include\\linux:/include --name debian_cpp debian_cpp_image /bin/bash -c 'Projects/docker/glfw_intellisense.sh'",
             "type" : "shell"
         },
         {
             "label": "Get Windows IntelliSense",
-            "command" : "docker run -it -v C:\\Users\\Administrator\\Projects:c:\\projects -v C:\\include\\windows:C:\\include windows_cpp powershell.exe -File C:\\projects\\docker\\intellisense.ps1",
+            "command" : "docker run -it -v C:\\Users\\niels\\Projects:c:\\projects -v C:\\include\\windows:C:\\include windows_cpp powershell.exe -File C:\\projects\\VSCode-docker-IDE\\docker\\intellisense.ps1",
             "type" : "shell"
         },
         {
             "label": "Get Windows OpenGL IntelliSense",
-            "command" : "docker run -it -v C:\\Users\\Administrator\\Projects:c:\\projects -v C:\\include\\windows:C\\include windows_cpp powershell.exe -File C:\\projects\\docker\\opengl_intellisense_windows.ps1"
+            "command" : "docker run -it -v C:\\Users\\niels\\Projects:c:\\projects -v C:\\include\\windows:C:\\include windows_cpp powershell.exe -File C:\\projects\\VSCode-docker-IDE\\docker\\opengl_intellisense_windows.ps1",
+            "type" : "shell"
         },
         {
             "label": "Get Android Intellisense",
-            "command" : "docker run --rm -it -v ${PWD}:/Projects -v C:\\include\\android:/include android-sdk /bin/bash -c 'Projects/docker/android_intellisense.sh'",
+            "command" : "docker run --rm -it -v ${PWD}:/Projects -v C:\\include\\android:/include android_cpp /bin/bash -c 'Projects/docker/android_intellisense.sh'",
+            "type" : "shell"
+        },
+        {
+            "label": "Install OpenGL Windows",
+            "command" : "docker run -it -v C:\\Users\\niels\\Projects:c:\\projects -v C:\\include\\windows:C:\\include windows_cpp powershell.exe -File C:\\projects\\VSCode-docker-IDE\\docker\\install_opengl.ps1",
             "type" : "shell"
         },
         // Run containers with command prompt
         {
-            "label": "Run_debian_cpp",
+            "label": "Run Linux",
             "command" : "docker run --rm -it -v ${PWD}:/Projects --name debian_cpp debian_cpp_image /bin/bash",
             "type" : "shell"
         },
         {
-            "label": "Run_windows_cpp",
-            "command" : "docker run -it --volume C:\\Users\\Administrator\\Projects:c:\\projects -v C:\\include\\windows:C:\\include windows_cpp",
+            "label": "Run Windows",
+            "command" : "docker run -it --volume C:\\Users\\niels\\Projects:c:\\projects -v C:\\include\\windows:C:\\include windows_cpp",
             "type" : "shell"
         },
         {
-            "label": "Run_android_cpp",
-            "command": "docker run -it -v C:\\Users\\Administrator\\Projects:/Projects android-sdk /bin/bash",
+            "label": "Run Android",
+            "command": "docker run --rm -it -v ${PWD}:/Projects --name android_cpp android-sdk_image /bin/bash",
             "type" : "shell"
         },
         // Compile single file
         {
-            "label": "Compile: CLang++6.0",
-            "command" : "docker exec -u root -it debian_cpp /bin/bash -c '/Projects/docker/clang++6.0.sh ${relativeFile}'",
+            "label": "Compile: CLang++10",
+            "command" : "docker exec -u root -it debian_cpp /bin/bash -c '/Projects/docker/clang++10.sh ${relativeFile}'",
             "type" : "shell"
         },
         {
-            "label": "Compile: g++8",
-            "command" : "docker exec -u root -it debian_cpp /bin/bash -c '/Projects/docker/g++8.sh ${relativeFile}'",
+            "label": "Compile: g++10",
+            "command" : "docker exec -u root -it debian_cpp /bin/bash -c '/Projects/docker/g++10.sh ${relativeFile}'",
             "type" : "shell"
         },
         // CMake
@@ -105,35 +116,58 @@
         {
             // Don't forget to switch to Windows containers
             "label": "Compile: Visual C++ (MSVC)",
-            "command" : "docker run -it --volume C:\\Users\\Administrator\\Projects:c:\\projects windows_cpp powershell.exe -File C:\\projects\\docker\\msBuild.ps1",
+            "command" : "docker run -it --volume C:\\Users\\niels\\Projects:c:\\projects windows_cpp powershell.exe -File C:\\projects\\VSCode-docker-IDE\\docker\\msBuild.ps1",
             "type" : "shell"
         },
         // Microsoft Visual C++ with OpenGL and Windows SDK
         {
             "label": "Compile: OpenGL + Visual C++",
-            "command" : "docker run -it --volume C:\\Users\\Administrator\\Projects:c:\\projects windows_cpp powershell.exe -File C:\\projects\\docker\\msBuildOpenGL.ps1",
+            "command" : "docker run -it --volume C:\\include\\windows\\.include\\:c:\\include --volume C:\\Users\\niels\\Projects:c:\\projects windows_cpp powershell.exe -File C:\\projects\\VSCode-docker-IDE\\docker\\msBuildOpenGL.ps1",
             "type" : "shell"
         },
         // CMake with Android SDK
         {
             "label": "Compile: Android CMake",
-            "command" : "docker run -it -v ${PWD}:/Projects android-sdk /bin/bash -c 'Projects/docker/cmake_android.sh'",
+            "command" : "docker exec -u root -it android_cpp /bin/bash -c '/Projects/docker/cmake_android.sh'",
             "type" : "shell"
         },
-        // Run windows binary on host system
+        // Run windows opengl app
         {
-            "label": "Run: Visual C++ app",
-            "command": "Start-Process -FilePath 'C:\\Users\\Administrator\\Projects\\bin\\run_Windows.exe'",
+            "label": "Run Windows Opengl app",
+            "command": "Start-Process -FilePath 'C:\\Users\\niels\\Projects\\VSCode-docker-IDE\\bin\\run_Windows.exe'",
             "type" : "shell"
         },
-        // Run linux X11 opengl binary from linux container with GUI
+        // Run linux X11 opengl app
+        // @todo path variables
         {
-            "label": "Run: Linux OpenGL app",
-            "command": "docker run -ti --rm -e DISPLAY=192.168.0.102:0.0 -v C:\\Users\\Administrator\\Projects:/Projects --name debian_cpp debian_cpp_image /bin/bash -c '/Projects/bin/run_linux'",
+            "label": "Run Linux OpenGL app",
+            "command": "bash docker/linux_x11_run.sh",
             "type" : "shell"
-        }
+        },
+        
+        // Run android opengl app (install)
+        {
+            "label": "Run Android OpenGL app",
+            "command": "C:\\Users\\niels\\Projects\\VSCode-docker-IDE\\docker\\run_android.cmd",
+            "type" : "shell"
+        },
+        // from docker container
+        // 
+        // "command": "docker run -ti --rm -e DISPLAY=192.168.0.102:0.0 -v C:\\Users\\niels\\Projects:/Projects --name debian_cpp debian_cpp_image /bin/bash -c '/Projects/bin/run_linux'",
         // To run android simulator from docker container
-        // use linux host system
-        // Currently I use real android phone
+        //      docker pull thyrlian/android-sdk-vnc
+        //      docker run -d -p 5901:5901 -p 2222:22 -v $(pwd)/sdk:/opt/android-sdk thyrlian/android-sdk-vnc
+        //   Install VNC client
+        //      localhost:5901 password with control : android, password with view-only : docker
+        //
+        // 
+        //          (VERY SLOW on arm)
+        //          (to create avd for x86 you need kvm feature and Linux host system)
+        //      cd $ANDROID_HOME/tools/bin
+        //      ./sdkmanager "system-images;android-25;google_apis;armeabi-v7a"
+        //      ./sdkmanager --licenses
+        //      echo "no" | avdmanager create avd -n test -k "system-images;android-25;google_apis;armeabi-v7a"
+        //      emulator -avd test -no-audio -no-boot-anim -accel on -gpu swiftshader_indirect &
+
     ]
 }

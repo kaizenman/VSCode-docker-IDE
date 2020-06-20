@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(hello_world)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -19,6 +19,8 @@ if(WIN32)
      freeglut
      glew32
      glfw3
+     opengl32.lib
+     glu32.lib
   )
 
  link_directories(${DYNAMIC_LIBRARY_DIR})

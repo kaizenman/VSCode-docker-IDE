@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd /Projects
 filename='unknown'
 
 if [ "$(uname)" == "Darwin" ]; then
